@@ -1,8 +1,7 @@
 package org.example.employeepayrollspringapp.controller;
 
-
-import org.example.employeepayrollspringapp.model.Employee;
-import org.example.employeepayrollspringapp.Interface.EmployeeService;
+import org.example.employeepayrollspringapp.dto.EmployeeDTO;
+import org.example.employeepayrollspringapp.service.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,29 +10,29 @@ import java.util.List;
 @RequestMapping("/employees")
 public class EmployeeController {
 
-    EmployeeService employeeService;
+    private final EmployeeService employeeService;
 
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 
     @GetMapping("/all")
-    public List<Employee> getAllEmployees() {
+    public List<EmployeeDTO> getAllEmployees() {
         return employeeService.getAllEmployees();
     }
 
     @GetMapping("/get/{id}")
-    public Employee getEmployeeById(@PathVariable int id) {
+    public EmployeeDTO getEmployeeById(@PathVariable int id) {
         return employeeService.getEmployeeById(id);
     }
 
     @PostMapping("/add")
-    public Employee addEmployee(@RequestBody Employee employee) {
-        return employeeService.addEmployee(employee);
+    public EmployeeDTO addEmployee(@RequestBody EmployeeDTO employeeDTO) {
+        return employeeService.addEmployee(employeeDTO);
     }
 
     @PutMapping("/update/{id}")
-    public Employee updateEmployee(@PathVariable int id, @RequestBody Employee updatedEmployee) {
+    public EmployeeDTO updateEmployee(@PathVariable int id, @RequestBody EmployeeDTO updatedEmployee) {
         return employeeService.updateEmployee(id, updatedEmployee);
     }
 

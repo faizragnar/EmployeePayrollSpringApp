@@ -1,11 +1,12 @@
 package org.example.employeepayrollspringapp.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Setter
 @Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "employees")
 public class Employee {
@@ -17,7 +18,5 @@ public class Employee {
     private String name;
     private String department;
     private double salary;
-
-    public Employee() {}
 
 }
