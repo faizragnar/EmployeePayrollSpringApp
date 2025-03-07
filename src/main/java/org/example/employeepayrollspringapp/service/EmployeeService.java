@@ -4,7 +4,7 @@ import org.example.employeepayrollspringapp.dto.EmployeeDTO;
 
 import java.util.List;
 
-public interface EmployeeService {
+public interface   EmployeeService {
     List<EmployeeDTO> getAllEmployees();
     EmployeeDTO getEmployeeById(int id);
     EmployeeDTO addEmployee(EmployeeDTO employeeDTO);
