@@ -13,7 +13,7 @@ public class EmployeeDTO {
     private int id;
     @NotBlank(message = "Name is required")
     @Size(max = 10, message = "Name must not exceed 10 characters")
-    @Pattern(regexp = "^[A-Z][a-zA-Z\\s]*$", message = "Name can only contain letters")
+    @Pattern(regexp = "^[A-Z][a-zA-Z\\s]*$", message = "First letter should be Capital and Name can only contain letters")
     private String name;
     private String department;
     private double salary;
