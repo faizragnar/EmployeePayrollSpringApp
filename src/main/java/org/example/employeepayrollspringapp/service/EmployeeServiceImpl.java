@@ -2,6 +2,7 @@ package org.example.employeepayrollspringapp.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.employeepayrollspringapp.dto.EmployeeDTO;
+import org.example.employeepayrollspringapp.exception.EmployeeNotFoundException;
 import org.example.employeepayrollspringapp.model.Employee;
 import org.example.employeepayrollspringapp.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .map(this::convertToDTO)
                 .orElseThrow(() -> {
                     log.error("Employee with ID {} not found!", id);
-                    return new RuntimeException("Employee not found!");
+                    throw new EmployeeNotFoundException("Employee not found with ID: " + id);
                 });
     }
 
@@ -57,7 +58,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee existingEmployee = employeeRepository.findById(id)
                 .orElseThrow(() -> {
                     log.error("Employee with ID {} not found for update!", id);
-                    return new RuntimeException("Employee not found!");
+                    throw new EmployeeNotFoundException("Employee not found with ID: " + id);
                 });
 
         existingEmployee.setName(updatedEmployee.getName());
@@ -74,7 +75,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         log.warn("Deleting employee with ID: {}", id);
         if (!employeeRepository.existsById(id)) {
             log.error("Employee with ID {} not found to delete!", id);
-            throw new RuntimeException("Employee not found!");
+            throw new EmployeeNotFoundException("Employee not found with ID: " + id);
         }
         employeeRepository.deleteById(id);
         log.info("Deleted employee with ID: {}", id);
